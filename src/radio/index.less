@@ -1,0 +1,16 @@
+@import "../../config/style/index";
+
+.@{prefix}radio {
+
+  .@{prefix}checkbox-inner {
+    border-width: 7px;
+    border-radius: 50%;
+  }
+
+  &.@{prefix}checkbox-active{
+
+    .@{prefix}checkbox-inner:before {
+      content: none;
+    }
+  }
+}

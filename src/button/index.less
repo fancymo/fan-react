@@ -1,0 +1,100 @@
+@import "../../config/style/index";
+
+@button-font-size: @font-size-default;
+@button-padding: @space-s @space-l;
+@button-border-radius: @border-radius-default;
+//@button-min-width: @button-font-size * 4.5;
+@button-min-width: 100%;
+@button-font-family: @font-family-default;
+@button-color: @color-primary;
+@button-height: 24px + @button-font-size * @line-height-default;
+
+@button-active-bg: @border-disabled-color;
+@button-active-color: @color-primary;
+
+@button-disabled-bg: @border-disabled-color;
+@button-disabled-color: @text-disabled-color;
+
+.@{prefix}button {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: @button-padding;
+  border: 0;
+  border-radius: @button-border-radius;
+  background-color: @button-color;
+  background-image: none;
+  color: #fff;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: @button-font-size;
+  font-family: @button-font-family;
+  outline: none;
+  cursor: pointer;
+
+  touch-action: manipulation;
+  user-select: none;
+  .transition();
+
+  &&-active,
+  &&-press {
+    transition: none;
+    background-color: darken(@color-primary, 10%);
+  }
+
+  &&-link {
+    background-color: transparent;
+    color: @color-primary;
+
+    &.@{prefix}button-active,
+    &.@{prefix}button-press {
+      background-color: @main-background-color;
+    }
+  }
+
+  &&-success {
+    background-color: @color-success;
+
+    &.@{prefix}button-active,
+    &.@{prefix}button-press {
+      background-color: darken(@color-success, 10%);
+    }
+  }
+
+  &&-error {
+    background-color: @color-error;
+
+    &.@{prefix}button-active,
+    &.@{prefix}button-press {
+      background-color: darken(@color-error, 10%);
+    }
+  }
+
+  &&-warning {
+    background-color: @color-warning;
+
+    &.@{prefix}button-active,
+    &.@{prefix}button-press {
+      background-color: darken(@color-warning, 10%);
+    }
+  }
+
+  &&-disabled,
+  &[disabled] {
+    background-color: @button-disabled-bg;
+    color: @button-disabled-color;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    .transition();
+
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &-small {
+    height: 32px;
+  }
+}

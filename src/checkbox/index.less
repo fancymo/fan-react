@@ -1,0 +1,85 @@
+@import "../../config/style/index";
+
+@checkbox-size: 20px;
+
+// 外框。
+@checkbox-border-width: 2px;
+@checkbox-border-space: @checkbox-border-width;
+@checkbox-border-radius: @border-radius-default;
+@checkbox-border-color-default: @border-primary-color;
+@checkbox-border-color-active: @color-primary;
+@checkbox-border-color-disabled: @border-disabled-color;
+
+.@{prefix}checkbox {
+  position: relative;
+  display: inline-block;
+  margin-right: @space-default;
+  margin-bottom: @space-default;
+  cursor: pointer;
+
+  &-inner {
+    display: inline-block;
+    position: relative;
+    border-radius: @checkbox-border-radius;
+    border-style: solid;
+    border-width: @checkbox-border-width;
+    border-color: @checkbox-border-color-default;
+    vertical-align: middle;
+    cursor: pointer;
+    .square(@checkbox-size);
+    .transition();
+
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -6px;
+      margin-left: -6px;
+      display: block;
+      background-color: transparent;
+      .square(12px);
+      .transition();
+    }
+
+  }
+
+  &-input {
+    position: absolute;
+    z-index: @back-z-index;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    .square(@checkbox-size);
+  }
+
+  &-label {
+    margin-left: @space-s;
+    font-size: @font-size-default;
+    line-height: @checkbox-size;
+    vertical-align: middle;
+  }
+
+  &&-active {
+    .@{prefix}checkbox-inner {
+      border-color: @checkbox-border-color-active;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -6px;
+        margin-left: -6px;
+        display: block;
+        background-color: @checkbox-border-color-active;
+        .square(12px);
+        .transition();
+      }
+    }
+
+  }
+
+}

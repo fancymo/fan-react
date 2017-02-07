@@ -1,0 +1,102 @@
+@import "../../config/style/index";
+
+@menu-height: 36px;
+@menu-itemgroup-top: @menu-height;
+@menu-item-text-color: #9da0a7;
+@menu-item-active-text-color: #3d4351;
+
+.@{prefix}menu {
+  position: relative;
+  cursor: pointer;
+
+  &-button {
+    margin-bottom: 0px;
+  }
+
+  &-itemgroup {
+    padding-left: @space-s;
+    padding-right: @space-s;
+
+    .@{prefix}menu-item {
+      display: inline-block;
+      padding: @space-s @space-default;
+      color: @menu-item-text-color;
+      text-decoration: none;
+      border-radius: @border-radius-default;
+      transition: all .1s;
+
+      &.@{prefix}menu-item-active {
+        color: @menu-item-active-text-color;
+      }
+
+      &:hover {
+        background-color: @color-primary;
+        color: #fff;
+      }
+    }
+
+  }
+
+  &&-active {
+
+  }
+
+  &&-vertical {
+    margin-right: @space-default;
+
+    .@{prefix}menu-itemgroup {
+      position: absolute;
+      z-index: @default-z-index;
+      top: @menu-itemgroup-top;
+      background-color: #fff;
+      height: 0px;
+      box-sizing: content-box;
+      overflow-y: auto;
+      box-sizing: border-box;
+
+      .@{prefix}menu-item {
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+      }
+
+    }
+
+    &.@{prefix}menu-active {
+
+      .@{prefix}menu-itemgroup {
+        padding-top: @space-s;
+        padding-bottom: @space-s;
+        height: auto;
+        border: 1px solid @border-secondary-color;
+        box-shadow: @box-shadow-default;
+      }
+
+    }
+
+    &.@{prefix}menu-align-right {
+      .@{prefix}menu-itemgroup {
+        right: 0;
+      }
+    }
+  }
+
+  &&-inline {
+
+    .@{prefix}menu-itemgroup {
+      width: 100%;
+      position: initial;
+      max-height: 300px;
+      opacity: .3;
+      .transition();
+    }
+
+    &.@{prefix}menu-active {
+
+      .@{prefix}menu-itemgroup {
+        opacity: 1;
+      }
+
+    }
+  }
+}
