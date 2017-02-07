@@ -35,12 +35,12 @@ module.exports = {
       },
     }, {
       test: /\.less$/,
-      // loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader'),
-      loader: 'style-loader!css-loader!less-loader'
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader'),
+      // loader: 'style-loader!css-loader!less-loader'
     }, {
       test: /\.css$/,
-      // loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
-      loader: 'style-loader!css-loader!less-loader'
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+      // loader: 'style-loader!css-loader!less-loader'
     }, {
       // 专供iconfont方案使用的，后面会带一串时间戳，需要特别匹配到
       test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
@@ -55,7 +55,7 @@ module.exports = {
       { from: 'example/index.html' },
       { from: 'node_modules/jquery/dist/jquery.min.js', to: 'vendor' },
     ]),
-    new ExtractTextPlugin('[name]/main.css'),
+    new ExtractTextPlugin('main.css'),
     // new webpack.optimize.CommonsChunkPlugin('common/main.js',['main']),
   ],
   resolve: {

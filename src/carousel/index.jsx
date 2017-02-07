@@ -185,12 +185,10 @@ class Carousel extends Component {
         self.handleChangeActivePage(activePage);
         self.scrollable = false;
       }
-    } else {
-      if (activePage > 0) {
-        activePage -= 1;
-        self.handleChangeActivePage(activePage);
-        self.scrollable = false;
-      }
+    } else if (activePage > 0) {
+      activePage -= 1;
+      self.handleChangeActivePage(activePage);
+      self.scrollable = false;
     }
     setTimeout(() => {
       self.scrollable = true;
