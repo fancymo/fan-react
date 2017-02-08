@@ -1,6 +1,6 @@
 {
   "name": "fan-react",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "React Component",
   "main": "src/index.js",
   "scripts": {

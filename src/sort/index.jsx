@@ -82,6 +82,7 @@ class Sort extends Component {
 
     if (e.target.className.indexOf(SORT_PLACEHOLDER) !== -1) return false;
     if (e.target.className.indexOf(SORT_ITEM) === -1) return false;
+    if (e.target === this.dragDom) return false;
 
     this.over = e.target;
 
