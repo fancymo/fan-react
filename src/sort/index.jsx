@@ -77,19 +77,23 @@ class Sort extends Component {
 
   handleDragOver(e) {
     const self = this;
+    const parent = this.sort;
+
     e.preventDefault();
     this.dragDom.style.display = 'none';
 
     if (e.target.className.indexOf(SORT_PLACEHOLDER) !== -1) return false;
     if (e.target.className.indexOf(SORT_ITEM) === -1) return false;
-    if (e.target === this.dragDom) return false;
+    if (e.target === this.dragDom) {
+      parent.insertBefore(this.placeholder, e.target.nextElementSibling);
+      return false;
+    }
 
     this.over = e.target;
 
-    const relY = e.clientY - this.sort.offsetTop - this.over.offsetTop;
+    const relY = e.clientY - this.sort.getBoundingClientRect().top - this.over.offsetTop;
     const height = this.over.offsetHeight / 2;
 
-    const parent = e.target.parentNode;
     if (relY > height) {
       this.nodePlacement = 'after';
       parent.insertBefore(this.placeholder, e.target.nextElementSibling);

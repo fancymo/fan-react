@@ -1,0 +1,102 @@
+@import "../../config/style/index";
+
+@switch-width: 30px;
+@switch-height: 20px;
+
+// 开关轨道（小横条）。
+@switch-track-color-default: @border-primary-color;    // 默认色
+@switch-track-color-active: @color-primary;            // 触发色
+@switch-track-color-disabled: @border-disabled-color;  // 失效色
+@switch-track-border-radius: @border-radius-default;   // 边框圆角
+
+// 开关滑块（小圆），滑块的边框颜色与轨道一样。
+@switch-slider-size: 20px;
+@switch-slider-bg-default: #fff;
+@switch-slider-bg-active: @color-primary;
+@switch-slider-bg-disabled: @border-disabled-color;
+
+.@{prefix}switch {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  width: @switch-width;
+  height: @switch-height;
+
+  &-track {
+    position: absolute;
+    top: 9px;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    border-style: solid;
+    border-color: @switch-track-color-default;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-radius: @switch-track-border-radius;
+    vertical-align: middle;
+
+    .transition();
+  }
+
+  &-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    border-width: 2px;
+    border-style: solid;
+    border-color: @switch-track-color-default;
+    border-radius: 50%;
+    background-color: @switch-slider-bg-default;
+
+    .square(@switch-slider-size);
+    .transition();
+  }
+
+  &&-active {
+    .@{prefix}switch-track {
+      border-color: @switch-track-color-active;
+
+      .transition();
+    }
+
+    .@{prefix}switch-slider {
+      left: @switch-width - @switch-slider-size;
+      border-color: @switch-track-color-active;
+      background-color: @switch-slider-bg-active;
+
+      .transition();
+    }
+
+    &.@{prefix}switch-disabled {
+      .@{prefix}switch-track {
+        border-color: @switch-track-color-disabled;
+
+        .transition();
+      }
+
+      .@{prefix}switch-slider {
+        border-color: @switch-track-color-disabled;
+        background-color: @switch-slider-bg-disabled;
+
+        .transition();
+      }
+    }
+  }
+
+  &&-disabled {
+    .@{prefix}switch-track {
+      border-color: @switch-track-color-disabled;
+
+      .transition();
+    }
+
+    .@{prefix}switch-slider {
+      border-color: @switch-track-color-disabled;
+
+      .transition();
+    }
+  }
+}
