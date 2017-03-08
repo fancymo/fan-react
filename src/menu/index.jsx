@@ -44,11 +44,15 @@ class Menu extends Component {
     this.handleExpendDropdown = this.handleExpendDropdown.bind(this);
     this.handleRemoveDropdown = this.handleRemoveDropdown.bind(this);
     this.handleClickMenuItem = this.handleClickMenuItem.bind(this);
+    this.handleMouseover = this.handleMouseover.bind(this);
+    this.handleMouseleave = this.handleMouseleave.bind(this);
   }
 
   componentDidMount() {
     this.menuItems = this.menu.querySelector(`.${MENU_ITEMGROUP}`).querySelectorAll(`.${MENU_ITEM}`);
     this.menu.addEventListener('click', this.handleExpendDropdown, false);
+    if (this.props.trigger === 'hover') this.menu.addEventListener('mouseover', this.handleMouseover, false);
+
     if (this.props.active) {
       this.menuItems.length && this.menuItems.forEach((child) => {
         child.addEventListener('click', this.handleClickMenuItem);
@@ -129,6 +133,24 @@ class Menu extends Component {
     });
     targetNode.classList.add(MENU_ITEM_ACTIVE);
     this.props.onSelect(targetNode.innerHTML);
+  }
+
+  handleMouseover(event) {
+    if (this.leaveSetimeout) {
+      clearTimeout(this.leaveSetimeout);
+    }
+    this.handleExpendDropdown();
+    this.menu.addEventListener('mouseleave', this.handleMouseleave);
+    this.menu.removeEventListener('mouseover', this.handleMouseover);
+  }
+
+  handleMouseleave(event) {
+    this.leaveSetimeout = setTimeout(() => {
+      this.handleRemoveDropdown(event);
+      this.menu.removeEventListener('mouseleave', this.handleMouseleave);
+    }, 300);
+
+    this.menu.addEventListener('mouseover', this.handleMouseover, false);
   }
 
 }
