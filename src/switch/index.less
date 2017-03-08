@@ -16,46 +16,67 @@
 @switch-slider-bg-disabled: @border-disabled-color;
 
 .@{prefix}switch {
-  position: relative;
   display: inline-block;
-  vertical-align: middle;
+  margin-right: @space-default;
+  margin-bottom: @space-default;
   cursor: pointer;
-  width: @switch-width;
-  height: @switch-height;
 
-  &-track {
-    position: absolute;
-    top: 9px;
-    left: 0;
-    overflow: hidden;
-    width: 100%;
-    height: 0;
-    border-style: solid;
-    border-color: @switch-track-color-default;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-radius: @switch-track-border-radius;
+  .@{prefix}switch-inner {
+    position: relative;
+    display: inline-block;
     vertical-align: middle;
+    width: @switch-width;
+    height: @switch-height;
 
-    .transition();
+    .@{prefix}switch-track {
+      position: absolute;
+      top: 9px;
+      left: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 0;
+      border-style: solid;
+      border-color: @switch-track-color-default;
+      border-top-width: 1px;
+      border-bottom-width: 1px;
+      border-radius: @switch-track-border-radius;
+      vertical-align: middle;
+
+      .transition();
+    }
+
+    .@{prefix}switch-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      border-width: 2px;
+      border-style: solid;
+      border-color: @switch-track-color-default;
+      border-radius: 50%;
+      background-color: @switch-slider-bg-default;
+
+      .square(@switch-slider-size);
+      .transition();
+    }
+
   }
 
-  &-slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    border-width: 2px;
-    border-style: solid;
-    border-color: @switch-track-color-default;
-    border-radius: 50%;
-    background-color: @switch-slider-bg-default;
+  .@{prefix}switch-label {
+    margin-left: @space-s;
+    line-height: 20px;
+    vertical-align: middle;
+    color: @switch-track-color-default;
 
-    .square(@switch-slider-size);
     .transition();
   }
 
   &&-active {
+
+    .@{prefix}switch-label {
+      color: @text-primary-color;
+    }
+
     .@{prefix}switch-track {
       border-color: @switch-track-color-active;
 
@@ -87,6 +108,11 @@
   }
 
   &&-disabled {
+
+    .@{prefix}switch-label {
+      color: @switch-track-color-disabled;
+    }
+
     .@{prefix}switch-track {
       border-color: @switch-track-color-disabled;
 

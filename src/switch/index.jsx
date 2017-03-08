@@ -5,10 +5,12 @@ import './index.less';
 
 const CLASS_PREFIX = 'fan-';
 const SWITCH_CLASS = `${CLASS_PREFIX}switch`;
+const INNER_CLASS = `${SWITCH_CLASS}-inner`;
 const TRACK_CLASS = `${SWITCH_CLASS}-track`;
 const SLIDER_CLASS = `${SWITCH_CLASS}-slider`;
 const ACTIVE_CLASS = `${SWITCH_CLASS}-active`;
 const DISABLED_CLASS = `${SWITCH_CLASS}-disabled`;
+const LABEL_CLASS = `${SWITCH_CLASS}-label`;
 
 const propTypes = {
   checked: React.PropTypes.bool,
@@ -44,20 +46,22 @@ class Switch extends Component {
 
       if (nextChecked !== prevChecked) {
         this.setState({ checked: nextChecked });
-        this.props.onChange(nextChecked, this.props.disabled);
       }
     }
   }
 
   render() {
-    const { className, disabled, ...rest } = this.props;
+    const { className, disabled, children, ...rest } = this.props;
 
     const classes = Classnames(className, SWITCH_CLASS, {
       [DISABLED_CLASS]: disabled,
       [ACTIVE_CLASS]: this.state.checked
     });
 
-    const reactDOM = <span className={classes} onClick={this.handleClick}><span className={TRACK_CLASS} /><span className={SLIDER_CLASS} /></span>;
+    const reactDOM = (<span className={classes} onClick={this.handleClick}>
+      <span className={INNER_CLASS}><span className={TRACK_CLASS} /><span className={SLIDER_CLASS} /></span>
+      <span className={LABEL_CLASS}>{children}</span>
+    </span>);
 
     return reactDOM;
   }
